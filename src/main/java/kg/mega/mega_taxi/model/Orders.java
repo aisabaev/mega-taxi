@@ -1,10 +1,12 @@
 package kg.mega.mega_taxi.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Data
 public class Orders {
 
     @Id
