@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -36,5 +39,16 @@ public class UserService {
 
     public Users getUser(Long id){
         return userRepository.findById(id).orElse(null);
+    }
+
+    public List<Users> getAllUsers(String filter){
+        if (filter == null || filter.isEmpty()){
+            return userRepository.findAll();
+        }
+        return userRepository.findAll().stream()
+                .filter(users1 -> users1.getRoles().equals(filter) || users1.getFirstName().equals(filter) ||
+                        users1.getLastName().equals(filter) || users1.getEmail().equals(filter) ||
+                        users1.getPhoneNumber().equals(filter)
+                ).toList();
     }
 }
