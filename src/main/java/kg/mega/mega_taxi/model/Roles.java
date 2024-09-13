@@ -1,12 +1,14 @@
 package kg.mega.mega_taxi.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
 @Entity
 @Table(name = "roles")
+@Data
 public class Roles {
 
     @Id

@@ -1,9 +1,11 @@
 package kg.mega.mega_taxi.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "order_history")
+@Data
 public class OrdersHistory {
 
     @Id
