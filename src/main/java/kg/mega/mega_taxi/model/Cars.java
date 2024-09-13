@@ -1,9 +1,11 @@
 package kg.mega.mega_taxi.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "cars")
+@Data
 public class Cars {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
