@@ -1,4 +1,4 @@
-package kg.mega.mega_taxi.exception;
+package kg.mega.mega_taxi.exception.OrderStatusExceptions;
 
 public class DeleteOrderStatusException extends RuntimeException{
     public DeleteOrderStatusException(String message) {

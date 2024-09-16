@@ -1,4 +1,4 @@
-package kg.mega.mega_taxi.service;
+package kg.mega.mega_taxi.exception.OrderStatusExceptions;
 
 public class UpdateOrderStatusException extends RuntimeException {
     public UpdateOrderStatusException(String message) {

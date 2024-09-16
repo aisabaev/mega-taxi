@@ -1,7 +1,10 @@
 package kg.mega.mega_taxi.service;
 
 
-import kg.mega.mega_taxi.exception.*;
+import kg.mega.mega_taxi.exception.PermisssionsExceptions.DeletePermissionsByIdException;
+import kg.mega.mega_taxi.exception.PermisssionsExceptions.GetPermissionsByIdException;
+import kg.mega.mega_taxi.exception.PermisssionsExceptions.PermissionsNotCreatedException;
+import kg.mega.mega_taxi.exception.PermisssionsExceptions.UpdatePermissionsException;
 import kg.mega.mega_taxi.model.Permissions;
 import kg.mega.mega_taxi.repository.PermissionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +42,14 @@ public class PermissionsService {
         }
     }
 
-    public Permissions updatePermissions(Permissions permissions) {
+    public void updatePermissions(Permissions permissions, Long id) {
         try {
-            return permissionsRepository.save(permissions);
+            permissionsRepository.findById(id).map(permissions1 -> {
+                        permissions1.setId(id);
+                        permissions1.setPermissionName(permissions.getPermissionName());
+                        return permissionsRepository.save(permissions1);
+                    }
+            ).orElseThrow(() -> new RuntimeException());
         }catch (UpdatePermissionsException e){
             throw new RuntimeException(e.getMessage() + " " + e.getCause());
         }
