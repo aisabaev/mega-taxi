@@ -2,10 +2,10 @@ package kg.mega.mega_taxi.service;
 
 
 
-import kg.mega.mega_taxi.exception.CreateOrderStatusException;
-import kg.mega.mega_taxi.exception.DeleteOrderStatusException;
-import kg.mega.mega_taxi.exception.GetOrderStatusByIdException;
-import kg.mega.mega_taxi.exception.UpdateOrderStatusException;
+import kg.mega.mega_taxi.exception.OrderStatusExceptions.CreateOrderStatusException;
+import kg.mega.mega_taxi.exception.OrderStatusExceptions.DeleteOrderStatusException;
+import kg.mega.mega_taxi.exception.OrderStatusExceptions.GetOrderStatusByIdException;
+import kg.mega.mega_taxi.exception.OrderStatusExceptions.UpdateOrderStatusException;
 import kg.mega.mega_taxi.model.OrderStatus;
 import kg.mega.mega_taxi.repository.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class OrdersStatusService {
+public class OrderStatusService {
 
     @Autowired
     private OrderStatusRepository orderStatusRepository;
@@ -44,9 +44,15 @@ public class OrdersStatusService {
         }
     }
 
-    public void updateOrderStatus(OrderStatus orderStatus){
+    public void updateOrderStatus(OrderStatus orderStatus, long id){
         try {
-            orderStatusRepository.save(orderStatus);
+            orderStatusRepository.findById(id).map(
+                    orderStatus1 -> {
+                        orderStatus1.setId(orderStatus.getId());
+                        orderStatus1.setStatus_name(orderStatus.getStatus_name());
+                        return orderStatusRepository.save(orderStatus1);
+                    }
+            ).orElseThrow(() -> new RuntimeException());
         }catch (UpdateOrderStatusException e){
             throw new RuntimeException(e.getMessage() + " " + e.getCause());
         }
