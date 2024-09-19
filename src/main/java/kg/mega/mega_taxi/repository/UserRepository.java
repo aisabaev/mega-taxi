@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
+
+    // TODO. Add search by all user's parameters such as name, phone etc.
+
 }

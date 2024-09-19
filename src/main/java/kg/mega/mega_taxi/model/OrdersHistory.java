@@ -19,18 +19,18 @@ public class OrdersHistory {
     private String endPoint;
 
 
-    @OneToMany
-    @JoinTable(name = "users")
+    @OneToOne
+    @JoinColumn(name = "client")
     private Users client;
 
-    @OneToMany
-    @JoinTable(name = "users")
+    @OneToOne
+    @JoinColumn(name = "driver")
     private Users driver;
 
     @Column(name = "price")
-    private float price;
+    private double price;
 
     @OneToOne
-    @JoinTable(name = "status_order")
-    private OrderStatus orderStatus;
+    @JoinColumn(name = "order_status")
+    private OrderStatus statusOrder;
 }

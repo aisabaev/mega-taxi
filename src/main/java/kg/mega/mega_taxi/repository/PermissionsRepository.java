@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-<
 
-/** @Импортироовали security.Permission вместо model.Permissions. Исправил */
+
+/** &#064;Импортировали security.Permission вместо model.Permissions. Исправил */
 
 
 @Repository

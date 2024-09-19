@@ -25,6 +25,6 @@ public class Users {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "roles_id")
     private Roles roles;
 }
