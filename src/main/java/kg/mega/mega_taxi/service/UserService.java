@@ -4,6 +4,11 @@ import kg.mega.mega_taxi.model.Users;
 import kg.mega.mega_taxi.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,11 +16,16 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
+    @Autowired
     private final UserRepository userRepository;
 
+    @Autowired
+    private final PasswordEncoder encoder;
+
     public void createUser(Users user){
+        user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -50,5 +60,10 @@ public class UserService {
                         users1.getLastName().equals(filter) || users1.getEmail().equals(filter) ||
                         users1.getPhoneNumber().equals(filter)
                 ).toList();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
     }
 }

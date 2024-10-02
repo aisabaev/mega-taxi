@@ -1,11 +1,15 @@
 package kg.mega.mega_taxi.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "permission")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Permissions {
 
     @Id

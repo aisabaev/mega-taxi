@@ -19,18 +19,18 @@ public class Orders {
     @Column(name = "destination_point")
     private String destinationPoint;
 
-    @OneToOne
-    @JoinColumn(name = "client")
+    @ManyToOne
+    @JoinColumn(name = "client", referencedColumnName = "id")
     private Users client;
 
-    @OneToOne
-    @JoinColumn(name = "driver")
+    @ManyToOne
+    @JoinColumn(name = "driver", referencedColumnName = "id")
     private Users driver;
 
     private double price;
 
-    @OneToOne
-    @JoinColumn(name = "order_status")
+    @ManyToOne
+    @JoinColumn(name = "order_status", referencedColumnName = "id")
     private OrderStatus statusOrder;
 
     public OrderStatus getStatusOrder() {
